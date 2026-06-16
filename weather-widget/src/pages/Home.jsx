@@ -18,7 +18,15 @@ function Home() {
     }
 
     return(
-        <h1>Home</h1>
+        <>
+        <SearchBar 
+        value={inputValue}
+        onChange={updatedValue}
+        onSubmit={currentValue}    
+        />
+        <p>{inputValue}</p>
+        <p>Current city: {city}</p>
+        </>
     )
 }
 

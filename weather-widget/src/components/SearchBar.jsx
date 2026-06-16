@@ -1,6 +1,9 @@
-function SearchBar() {
+function SearchBar({value, onChange, onSubmit}) {
     return(
-        <h1>Search Bar</h1>
+        <>
+        <input value={value} onChange={onChange} />
+        <button onClick={onSubmit}>Search</button>
+        </>
     )
 }
 
