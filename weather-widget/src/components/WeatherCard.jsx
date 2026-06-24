@@ -3,10 +3,16 @@ function WeatherCard( {weather} ) {
     
     return(
         <>
-        <h1>{weather.city}</h1>
-        <p>{weather.temperature}</p>
-        <p>{weather.wind}</p>
-        <p>{weather.description}</p>
+        <h1>{weather.name}</h1>
+
+        <img
+                src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                alt="weather icon"
+            />
+
+        <p>{weather.main.temp}°C</p>
+        <p>{weather.weather[0]?.description}</p>
+        <p>{weather.wind.speed} m/s</p>
         </>
     )
 }
