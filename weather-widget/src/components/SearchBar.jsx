@@ -1,7 +1,15 @@
 function SearchBar({value, onChange, onSubmit}) {
+    
     return(
         <>
-        <input value={value} onChange={onChange} />
+        <input value={value} 
+        onChange={onChange} 
+        onKeyDown={(event) => {
+        if(event.key === "Enter") {
+            onSubmit();
+        }
+        } }
+        />
         <button onClick={onSubmit}>Search</button>
         </>
     )

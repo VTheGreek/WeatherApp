@@ -9,6 +9,13 @@ function Home() {
     const [weather, setWeather] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [unit, setUnit] = useState('metric');
+
+    const toggleUnit = () => {
+        setUnit(prev => 
+            prev === 'metric' ? 'imperial' : 'metric'
+        )
+    }
 
     useEffect(() => {
         if (!city) return;
@@ -19,7 +26,7 @@ function Home() {
             setError("");
 
             const res = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`
             )
 
             if (!res.ok) throw new Error('City Not Found');
@@ -36,30 +43,36 @@ function Home() {
         };
 
         fetchWeather();
-    }, [city]);
+    }, [city, unit]);
 
     const updatedValue = event => {
         setInputValue(event.target.value) 
     }
 
     const currentValue = () => {
-        setCity(inputValue)
+        const trimmedCity = inputValue.trim();
+
+        if (!trimmedCity) return;
+        setCity(trimmedCity);
     }
 
     return(
         <>
         <SearchBar 
         value={inputValue}
-        onChange={updatedValue}
+        onChange={updatedValue} 
         onSubmit={currentValue}    
         />
 
         <p>{inputValue}</p>
         <p>Current city: {city}</p>
+        <button onClick={toggleUnit}>
+            Switch to {unit === "metric" ? "°F" : "°C"}
+        </button>
 
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
-        {weather && <WeatherCard weather={weather} />}
+        {weather && <WeatherCard weather={weather} unit={unit} />}
         </>
     )
 }

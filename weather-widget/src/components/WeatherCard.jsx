@@ -1,4 +1,4 @@
-function WeatherCard( {weather} ) {
+function WeatherCard( {weather, unit} ) {
     if (!weather) return null;
     
     return(
@@ -10,9 +10,13 @@ function WeatherCard( {weather} ) {
                 alt="weather icon"
             />
 
-        <p>{weather.main.temp}°C</p>
+        <p>{weather.main.temp}
+            {unit === "metric" ? "°C" : "°F"}
+        </p>
         <p>{weather.weather[0]?.description}</p>
-        <p>{weather.wind.speed} m/s</p>
+        <p>{weather.wind.speed} 
+            {unit === "metric" ? " m/s" : " mph"}
+        </p>
         </>
     )
 }
