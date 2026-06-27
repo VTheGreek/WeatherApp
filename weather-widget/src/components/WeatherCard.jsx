@@ -1,4 +1,4 @@
-function WeatherCard( {weather, unit} ) {
+function WeatherCard( {weather, unit, toggleUnit} ) {
     if (!weather) return null;
     
     return(
@@ -10,13 +10,19 @@ function WeatherCard( {weather, unit} ) {
                 alt="weather icon"
             />
 
-        <p>{weather.main.temp}
+        <p>{Math.round(weather.main.temp)}
             {unit === "metric" ? "°C" : "°F"}
         </p>
+
         <p>{weather.weather[0]?.description}</p>
-        <p>{weather.wind.speed} 
+
+        <p>{Math.round(weather.wind.speed)} 
             {unit === "metric" ? " m/s" : " mph"}
         </p>
+
+        <button onClick={toggleUnit}>
+            Switch to {unit === "metric" ? "°F" : "°C"}
+        </button>
         </>
     )
 }

@@ -66,13 +66,10 @@ function Home() {
 
         <p>{inputValue}</p>
         <p>Current city: {city}</p>
-        <button onClick={toggleUnit}>
-            Switch to {unit === "metric" ? "°F" : "°C"}
-        </button>
 
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
-        {weather && <WeatherCard weather={weather} unit={unit} />}
+        {weather && <WeatherCard weather={weather} unit={unit} toggleUnit={toggleUnit} />}
         </>
     )
 }
