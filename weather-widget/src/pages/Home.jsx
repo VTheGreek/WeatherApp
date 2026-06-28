@@ -57,20 +57,17 @@ function Home() {
     }
 
     return(
-        <>
+        <div className="min-h-screen bg-gradient-to-br from-sky-400 to-blue-700 flex flex-col items-center py-10 gap-6">
         <SearchBar 
         value={inputValue}
         onChange={updatedValue} 
         onSubmit={currentValue}    
         />
 
-        <p>{inputValue}</p>
-        <p>Current city: {city}</p>
-
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
+        {loading && (<p className='text-white text-lg animate-pulse'>Loading...</p>)}
+        {error && (<p className='bg-red-500 text-white px-4 py-2 rounded-lg'>{error}</p>)}
         {weather && <WeatherCard weather={weather} unit={unit} toggleUnit={toggleUnit} />}
-        </>
+        </div>
     )
 }
 
