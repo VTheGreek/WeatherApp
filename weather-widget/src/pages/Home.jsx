@@ -10,11 +10,18 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [unit, setUnit] = useState('metric');
+    const [favorites, setFavorites] = useState([]);
 
     const toggleUnit = () => {
         setUnit(prev => 
             prev === 'metric' ? 'imperial' : 'metric'
         )
+    }
+
+    const addToFavorites = () => {
+        if(!weather) return;
+
+        setFavorites(prev => [...prev, weather]);
     }
 
     useEffect(() => {
@@ -66,7 +73,12 @@ function Home() {
 
         {loading && (<p className='text-white text-lg animate-pulse'>Loading...</p>)}
         {error && (<p className='bg-red-500 text-white px-4 py-2 rounded-lg'>{error}</p>)}
-        {weather && <WeatherCard weather={weather} unit={unit} toggleUnit={toggleUnit} />}
+        {weather && <WeatherCard weather={weather} unit={unit} toggleUnit={toggleUnit} addToFavorites={addToFavorites} />}
+
+        <p className="text-white font-semibold">
+        Favorites: {favorites.length}
+        </p>
+        
         </div>
     )
 }

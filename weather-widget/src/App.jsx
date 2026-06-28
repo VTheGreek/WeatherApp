@@ -5,10 +5,12 @@ import AppRoutes from './routes/AppRoutes'
 function App() {
 
   return (
-    <div className='min-h-screen bg-blue-500 flex items-center justify-center'>
-      <h1 className='text-5xl font-bold text-white'>tailwind works</h1>
+    <div className='min-h-screen flex flex-col'>
       <NavBar />
+
+     <main className='flex-1'> 
       <AppRoutes />
+     </main> 
     </div>
   )
 }

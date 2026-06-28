@@ -1,4 +1,4 @@
-function WeatherCard( {weather, unit, toggleUnit} ) {
+function WeatherCard( {weather, unit, toggleUnit, addToFavorites} ) {
     if (!weather) return null;
     
     return(
@@ -6,11 +6,12 @@ function WeatherCard( {weather, unit, toggleUnit} ) {
         <h1 className="text-2xl font-bold mb-2">{weather.name}</h1>
 
         <img
+                className="mx-auto w-28 h-28"
                 src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                 alt="weather icon"
             />
 
-        <p className="text-4xl font-bold mt-2">
+        <p className="text-5xl font-bold mt-2">
             {Math.round(weather.main.temp)}
             {unit === "metric" ? "°C" : "°F"}
         </p>
@@ -24,11 +25,23 @@ function WeatherCard( {weather, unit, toggleUnit} ) {
             {unit === "metric" ? " m/s" : " mph"}
         </p>
 
+        <p className="mt-2 text-white/80">
+            Humidity: {weather.main.humidity}%
+        </p>
+
         <button
-        className="mt-4 bg-blue-700 hover:bg-blue-800 transition duration-300 text-white px-4 py-2 rounded-lg" 
+        className="mt-4 w-full bg-blue-700 hover:bg-blue-800 transition duration-300 text-white px-4 py-2 rounded-lg" 
         onClick={toggleUnit}>
             Switch to {unit === "metric" ? "°F" : "°C"}
         </button>
+
+        <button
+        className="mt-2 bg-red-500 hover:bg-red-600 transition duration-300 text-white px-4 py-2 rounded-lg w-full"
+        onClick={addToFavorites}
+        >
+            ❤️ Add to Favorites
+        </button>
+
         </div>
     )
 }

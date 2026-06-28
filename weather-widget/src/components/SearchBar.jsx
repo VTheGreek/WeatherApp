@@ -2,9 +2,6 @@ function SearchBar({value, onChange, onSubmit}) {
     
     return(
         <>
-        <h1 className="text-4xl font-bold text-white mb-8">
-           Weather App
-        </h1>
         
         <div className="flex gap-2">
         <input
