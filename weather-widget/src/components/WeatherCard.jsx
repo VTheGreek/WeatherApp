@@ -1,9 +1,16 @@
+import { Link } from "react-router-dom";
+
 function WeatherCard( {weather, unit, toggleUnit, addToFavorites} ) {
     if (!weather) return null;
     
     return(
         <div className="bg-white/20 backdrop-blur-md text-white rounded-2xl shadow-lg p-6 w-80 text-center">
-        <h1 className="text-2xl font-bold mb-2">{weather.name}</h1>
+         <Link
+             to={`/city/${weather.name}`}
+            className="text-2xl font-bold mb-2 block hover:underline"
+        >
+        {weather.name}
+        </Link>
 
         <img
                 className="mx-auto w-28 h-28"

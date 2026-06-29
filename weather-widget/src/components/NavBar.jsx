@@ -1,33 +1,33 @@
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 function NavBar() {
-  return (
-    <nav className="bg-blue-900 shadow-md">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+    const { theme, toggleTheme } = useTheme();
 
-        <h1 className="text-2xl font-bold text-white">
-          Weather App
-        </h1>
+    return (
+        <nav className="flex justify-between items-center p-5 bg-blue-800 text-white">
 
-        <div className="flex gap-6">
-          <Link
-            to="/"
-            className="text-white hover:text-sky-300 transition"
-          >
-            Home
-          </Link>
+            <div className="flex gap-6">
 
-          <Link
-            to="/favorites"
-            className="text-white hover:text-sky-300 transition"
-          >
-            Favorites
-          </Link>
-        </div>
+                <Link to="/">Home</Link>
 
-      </div>
-    </nav>
-  );
+                <Link to="/favorites">
+                    Favorites
+                </Link>
+
+            </div>
+
+            <button
+                onClick={toggleTheme}
+                className="bg-white text-black px-3 py-2 rounded"
+            >
+                {theme === "light"
+                    ? "🌙 Dark"
+                    : "☀️ Light"}
+            </button>
+
+        </nav>
+    );
 }
 
 export default NavBar;
