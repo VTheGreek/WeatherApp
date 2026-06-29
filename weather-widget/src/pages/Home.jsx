@@ -10,7 +10,11 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [unit, setUnit] = useState('metric');
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useState(() => {
+        const storedFavorites = localStorage.getItem("favorites");
+
+        return storedFavorites ? JSON.parse(storedFavorites) : [];
+    });
 
     const toggleUnit = () => {
         setUnit(prev => 
@@ -21,7 +25,13 @@ function Home() {
     const addToFavorites = () => {
         if(!weather) return;
 
-        setFavorites(prev => [...prev, weather]);
+        setFavorites(prev => {
+            const exists = prev.some(city => city.id === weather.id);
+
+            if (exists) return prev;
+
+            return [...prev, weather];
+        });
     }
 
     useEffect(() => {
@@ -51,6 +61,13 @@ function Home() {
 
         fetchWeather();
     }, [city, unit]);
+
+    useEffect(() => {
+    localStorage.setItem(
+        "favorites",
+        JSON.stringify(favorites)
+    );
+    }, [favorites]);
 
     const updatedValue = event => {
         setInputValue(event.target.value) 
