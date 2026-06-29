@@ -76,9 +76,6 @@ function Home() {
         addToFavorites={() => addToFavorites(weather)} 
         />}
 
-        <p className="text-white font-semibold">
-        Favorites: {favorites.length}
-        </p>
         
         </div>
     )
